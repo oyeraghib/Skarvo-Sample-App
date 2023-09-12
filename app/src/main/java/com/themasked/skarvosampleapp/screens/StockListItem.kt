@@ -42,11 +42,10 @@ fun StockListItem() {
             }
 
             Image(
-                painter = painterResource(id = R.drawable.ic_line_axis),
+                painter = painterResource(id = R.drawable.stock_down),
                 contentDescription = "bedtime icon",
                 modifier = Modifier
                     .size(width = 60.dp, height = 40.dp)
-                    .background(Color.Red)
             )
 
             Spacer(modifier = Modifier.padding(4.dp))
@@ -77,4 +76,10 @@ fun StockListItem() {
                 .background(Color(0xFFEEEEEE))
         )
     }
+}
+
+@Preview
+@Composable
+fun AddNewStockItem() {
+    
 }
