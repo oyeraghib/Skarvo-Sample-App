@@ -16,7 +16,7 @@ interface StockItemDao {
 
     //Get all the stocks from the list
     @Query("SELECT * from stock_item_entity")
-    fun getAllStocks(): LiveData<List<StockItemModel>>
+    suspend fun getAllStocks(): List<StockItemModel>
 
     //Delete a stock
     @Query("DELETE FROM stock_item_entity where id =:id")
