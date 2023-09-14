@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -66,16 +67,8 @@ fun StockList() {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .background(color)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_delete),
-                                contentDescription = "Delete",
-                                tint = Color.White,
-                                modifier = Modifier.size(48.dp)
-                                    .align(Alignment.CenterEnd)
-                                    .padding(end = 8.dp),
-                            )
-                        }
+                                .padding(10.dp)
+                        )
                     },
                     dismissContent = {
                         Box(modifier = Modifier.fillMaxSize()) {

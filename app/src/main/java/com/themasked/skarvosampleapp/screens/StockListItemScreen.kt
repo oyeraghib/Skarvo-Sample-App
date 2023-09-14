@@ -41,10 +41,10 @@ fun StockListItem(
             ) {
                 stockItemModel.stockName?.let {
                     stockItemModel.companyName?.let {
-                        Text(text = stockItemModel.stockName, fontSize = 16.sp,
+                        Text(text = stockItemModel.stockName, fontSize = 22.sp,
                             color = MaterialTheme.colorScheme.onPrimary
                         )
-                        Text(text = stockItemModel.companyName, fontSize = 10.sp,
+                        Text(text = stockItemModel.companyName, fontSize = 14.sp,
                             color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
@@ -72,17 +72,17 @@ fun StockListItem(
                 stockItemModel.stockPrice?.let { 
                     stockItemModel.stockChange?.let {
                         Text(
-                            text = stockItemModel.stockPrice.toString(),
+                            text = "\$${stockItemModel.stockPrice.toString()}",
                             modifier = Modifier.align(Alignment.End),
-                            fontSize = 16.sp,
+                            fontSize = 20.sp,
                             color = MaterialTheme.colorScheme.onPrimary
 
                         )
 
                         Text(
-                            text = stockItemModel.stockChange.toString(),
+                            text = "${stockItemModel.stockChange}%",
                             modifier = Modifier.align(Alignment.End),
-                            fontSize = 10.sp,
+                            fontSize = 14.sp,
                             color = MaterialTheme.colorScheme.onPrimary
 
                         )
