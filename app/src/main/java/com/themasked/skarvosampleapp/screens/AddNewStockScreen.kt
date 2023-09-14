@@ -153,21 +153,20 @@ fun AddNewStockScreen(navController: NavController, context: Context) {
                 .padding(0.dp, 16.dp),
             colors = ButtonDefaults.buttonColors(androidx.compose.ui.graphics.Color.Red),
             onClick = {
-                stockItemsViewModel.addStock(StockItemEntity(
-                    stockName = stockName,
-                    companyName = companyName,
-                    stockPrice = stockPrice.toInt(),
-                    stockChange = stockChange.toFloat()
-                ))
-                if (stockName.isEmpty() || companyName.isEmpty() ||
-                    stockChange.isEmpty() || stockPrice.isEmpty()) {
+                if (stockName.isNullOrEmpty() || companyName.isNullOrEmpty() ||
+                    stockChange.isNullOrEmpty() || stockPrice.isNullOrEmpty()) {
                     Toast.makeText(context, "All fields are required", Toast.LENGTH_LONG).show()
                 } else {
+                    stockItemsViewModel.addStock(StockItemEntity(
+                        stockName = stockName,
+                        companyName = companyName,
+                        stockPrice = stockPrice.toInt(),
+                        stockChange = stockChange.toFloat()
+                    ))
                     navController.popBackStack()
                 }
             }) {
-                Text(text = "Add Stock",
-                    )
+                Text(text = "Add Stock")
         }
     }
 }
