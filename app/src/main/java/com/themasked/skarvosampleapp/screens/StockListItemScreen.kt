@@ -51,14 +51,19 @@ fun StockListItem(
                 }
             }
 
-            Image(
-                painter = painterResource(id = R.drawable.stock_down),
-                contentDescription = "bedtime icon",
-                modifier = Modifier
-                    .size(width = 60.dp, height = 40.dp)
-            )
+            stockItemModel.stockChange?.let {
+                Image(
+                    painter = if (it > 0) painterResource(id = R.drawable.stock_up)
+                    else painterResource(id = R.drawable.stock_down),
+                    contentDescription = "stock icon",
+                    modifier = Modifier
+                        .size(width = 60.dp, height = 40.dp)
+                )
 
-            Spacer(modifier = Modifier.padding(4.dp))
+                Spacer(modifier = Modifier.padding(4.dp))
+
+            }
+
 
             Column(
                 modifier = Modifier.weight(0.3f)
