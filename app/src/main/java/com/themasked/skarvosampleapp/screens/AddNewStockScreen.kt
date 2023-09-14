@@ -1,7 +1,7 @@
 package com.themasked.skarvosampleapp.screens
 
-import android.graphics.Color
-import androidx.activity.compose.BackHandler
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -31,19 +32,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.themasked.skarvosampleapp.R
+import com.themasked.skarvosampleapp.database.entity.StockItemEntity
+import com.themasked.skarvosampleapp.viewmodel.StockItemsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StockRow(label: String, text: String, onTextChange: (String) -> Unit) {
+fun StockRow(label: String, text: String, keyboardType: KeyboardType, onTextChange: (String) -> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(8.dp),
         modifier = Modifier
@@ -64,7 +65,9 @@ fun StockRow(label: String, text: String, onTextChange: (String) -> Unit) {
 
             TextField(value = text, onValueChange = { newText ->
                 onTextChange(newText)
-            })
+            },
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = keyboardType)
+            )
         }
     }
 }
@@ -95,7 +98,9 @@ fun TopBackButton(
 }
 
 @Composable
-fun AddNewStockScreen(navController: NavController) {
+fun AddNewStockScreen(navController: NavController, context: Context) {
+    val stockItemsViewModel: StockItemsViewModel = hiltViewModel()
+
     var stockName by remember {
         mutableStateOf("")
     }
@@ -130,16 +135,16 @@ fun AddNewStockScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        StockRow("Stock Name", stockName) {
+        StockRow("Stock Name", stockName, keyboardType = KeyboardType.Text) {
             stockName = it
         }
-        StockRow("Company Name", companyName) {
+        StockRow("Company Name", companyName, keyboardType = KeyboardType.Text) {
             companyName = it
         }
-        StockRow("Stock Price", stockPrice) {
+        StockRow("Stock Price", stockPrice, KeyboardType.Number) {
             stockPrice = it
         }
-        StockRow("Stock Change", stockChange) {
+        StockRow("Stock Change", stockChange, KeyboardType.Decimal) {
             stockChange = it
         }
 
@@ -147,8 +152,22 @@ fun AddNewStockScreen(navController: NavController) {
             modifier = Modifier
                 .padding(0.dp, 16.dp),
             colors = ButtonDefaults.buttonColors(androidx.compose.ui.graphics.Color.Red),
-            onClick = { /*TODO*/ }) {
-                Text(text = "Add Stock")
+            onClick = {
+                stockItemsViewModel.addStock(StockItemEntity(
+                    stockName = stockName,
+                    companyName = companyName,
+                    stockPrice = stockPrice.toInt(),
+                    stockChange = stockChange.toFloat()
+                ))
+                if (stockName.isEmpty() || companyName.isEmpty() ||
+                    stockChange.isEmpty() || stockPrice.isEmpty()) {
+                    Toast.makeText(context, "All fields are required", Toast.LENGTH_LONG).show()
+                } else {
+                    navController.popBackStack()
+                }
+            }) {
+                Text(text = "Add Stock",
+                    )
         }
     }
 }

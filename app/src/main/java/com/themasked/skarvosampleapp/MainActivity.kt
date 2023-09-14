@@ -1,5 +1,6 @@
 package com.themasked.skarvosampleapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,20 +20,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 //            AddNewStockScreen()
-            Skarvo()
+            Skarvo(this@MainActivity)
         }
     }
 }
 
 @Composable
-fun Skarvo() {
+fun Skarvo(context: Context) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "home_screen") {
         composable(route = "home_screen") {
             HomeScreen(navController)
         }
         composable(route = "add_stock") {
-            AddNewStockScreen(navController)
+            AddNewStockScreen(navController, context = context)
         }
     }
 }

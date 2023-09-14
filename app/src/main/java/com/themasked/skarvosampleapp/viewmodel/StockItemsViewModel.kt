@@ -15,20 +15,7 @@ import javax.inject.Inject
 class StockItemsViewModel @Inject constructor(private val repository: StockRepository) :
     ViewModel() {
 
-    private val _stocks: MutableLiveData<List<StockItemEntity>>? = MutableLiveData()
-    val stocks: LiveData<List<StockItemEntity>>? get() = _stocks
-
-    init {
-        getAllStocks()
-    }
-
-    fun getAllStocks() = viewModelScope.launch {
-        repository.readAllStock().let {
-            if (!it.isNullOrEmpty()) {
-                _stocks?.postValue(it)
-            }
-        }
-    }
+    val getAllStocks: LiveData<List<StockItemEntity>>? = repository.readAllStock()
 
     fun addStock(stock: StockItemEntity) = viewModelScope.launch {
         repository.addStock(stock)

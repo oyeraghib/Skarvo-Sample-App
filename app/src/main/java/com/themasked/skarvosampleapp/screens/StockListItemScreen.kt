@@ -38,8 +38,12 @@ fun StockListItem(
             Column(
                 modifier = Modifier.weight(0.7f)
             ) {
-                Text(text = "Dow Jones", fontSize = 16.sp)
-                Text(text = "Dow Jones Industrial Avg", fontSize = 10.sp)
+                stockItemModel.stockName?.let {
+                    stockItemModel.companyName?.let {
+                        Text(text = stockItemModel.stockName, fontSize = 16.sp)
+                        Text(text = stockItemModel.companyName, fontSize = 10.sp)
+                    }
+                }
             }
 
             Image(
@@ -54,17 +58,22 @@ fun StockListItem(
             Column(
                 modifier = Modifier.weight(0.3f)
             ) {
-                Text(
-                    text = "$34,333",
-                    modifier = Modifier.align(Alignment.End),
-                    fontSize = 16.sp
-                )
 
-                Text(
-                    text = "+32%",
-                    modifier = Modifier.align(Alignment.End),
-                    fontSize = 10.sp
-                )
+                stockItemModel.stockPrice?.let { 
+                    stockItemModel.stockChange?.let {
+                        Text(
+                            text = stockItemModel.stockPrice.toString(),
+                            modifier = Modifier.align(Alignment.End),
+                            fontSize = 16.sp
+                        )
+
+                        Text(
+                            text = stockItemModel.stockChange.toString(),
+                            modifier = Modifier.align(Alignment.End),
+                            fontSize = 10.sp
+                        )
+                    }
+                }
             }
         }
 

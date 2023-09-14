@@ -15,7 +15,7 @@ import com.themasked.skarvosampleapp.viewmodel.StockItemsViewModel
 fun StockList() {
     val stockItemsViewModel: StockItemsViewModel = hiltViewModel()
 //    stockItemsViewModel.getAllStocks()
-    val stockItems = stockItemsViewModel.stocks?.observeAsState()
+    val stockItems = stockItemsViewModel.getAllStocks?.observeAsState()
 
     LazyColumn(content = {
         stockItems?.value?.let { value ->
