@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,8 +24,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -118,7 +121,11 @@ fun AddNewStockScreen(navController: NavController, context: Context) {
     }
 
     TopBackButton(
-        imageResId = R.drawable.ic_back,
+        imageResId = if (isSystemInDarkTheme()) {
+            R.drawable.ic_back_white
+        } else {
+            R.drawable.ic_back
+        },
         onClick = {
             navController.popBackStack()
         })
@@ -166,7 +173,7 @@ fun AddNewStockScreen(navController: NavController, context: Context) {
                     navController.popBackStack()
                 }
             }) {
-                Text(text = "Add Stock")
+                Text(text = "Add Stock", color = MaterialTheme.colorScheme.onPrimary)
         }
     }
 }

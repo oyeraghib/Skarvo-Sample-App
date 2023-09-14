@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,8 +41,12 @@ fun StockListItem(
             ) {
                 stockItemModel.stockName?.let {
                     stockItemModel.companyName?.let {
-                        Text(text = stockItemModel.stockName, fontSize = 16.sp)
-                        Text(text = stockItemModel.companyName, fontSize = 10.sp)
+                        Text(text = stockItemModel.stockName, fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Text(text = stockItemModel.companyName, fontSize = 10.sp,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
                     }
                 }
             }
@@ -64,13 +69,17 @@ fun StockListItem(
                         Text(
                             text = stockItemModel.stockPrice.toString(),
                             modifier = Modifier.align(Alignment.End),
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onPrimary
+
                         )
 
                         Text(
                             text = stockItemModel.stockChange.toString(),
                             modifier = Modifier.align(Alignment.End),
-                            fontSize = 10.sp
+                            fontSize = 10.sp,
+                            color = MaterialTheme.colorScheme.onPrimary
+
                         )
                     }
                 }
