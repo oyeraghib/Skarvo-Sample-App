@@ -11,15 +11,15 @@ class StockItemEntity {
     var id: Int? = 0
 
     @ColumnInfo(name = "stock_name")
-    var stockName: String = ""
+    var stockName: String? = null
 
     @ColumnInfo(name = "company_name")
-    var companyName: String = ""
+    var companyName: String? = null
 
     @ColumnInfo(name = "stock_price")
-    var stockPrice: Int = 0
+    var stockPrice: Int? = null
 
     @ColumnInfo(name = "stock_change")
-    var stockChange: Float = 0f
+    var stockChange: Float? = null
 
 }

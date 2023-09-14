@@ -8,7 +8,7 @@ import com.themasked.skarvosampleapp.database.entity.StockItemEntity
 @Database(
     entities = [StockItemEntity::class],
     exportSchema = false,
-    version = 1
+    version = 2
 )
 abstract class StockItemsDatabase : RoomDatabase() {
 
