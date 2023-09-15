@@ -15,12 +15,15 @@ import javax.inject.Inject
 class StockItemsViewModel @Inject constructor(private val repository: StockRepository) :
     ViewModel() {
 
+    //Get all stocks in a list
     val getAllStocks: LiveData<List<StockItemEntity>>? = repository.readAllStock()
 
+    //Add a new Stock
     fun addStock(stock: StockItemEntity) = viewModelScope.launch {
         repository.addStock(stock)
     }
 
+    //Delete an existing Stock
     fun deleteStock(id: Int) = viewModelScope.launch {
         repository.deleteStock(id)
     }

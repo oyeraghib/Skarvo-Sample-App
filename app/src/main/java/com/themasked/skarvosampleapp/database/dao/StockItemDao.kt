@@ -11,15 +11,15 @@ import com.themasked.skarvosampleapp.models.StockItemModel
 @Dao
 interface StockItemDao {
 
-    //Insert a new stock
+    //Insert a new stock in database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addStock(stock: StockItemEntity)
 
-    //Get all the stocks from the list
+    //Get all the stocks from the database
     @Query("SELECT * from stock_item_entity")
     fun getAllStocks(): LiveData<List<StockItemEntity>>?
 
-    //Delete a stock
+    //Delete a stock from database
     @Query("DELETE FROM stock_item_entity where id =:id")
     suspend fun deleteStock(id: Int)
 }

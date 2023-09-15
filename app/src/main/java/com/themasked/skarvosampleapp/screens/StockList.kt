@@ -81,7 +81,7 @@ fun StockList() {
                     },
                 )
                 if (dismissState.isDismissed(DismissDirection.EndToStart)) {
-                    Log.d("Dismissed", "Dismissed id: ${stockItem.id}")
+                    Log.d("Stock List", "Dismissed stock id: ${stockItem.id}")
                     stockItem.id?.let {
                         stockItemsViewModel.deleteStock(it)
                     }

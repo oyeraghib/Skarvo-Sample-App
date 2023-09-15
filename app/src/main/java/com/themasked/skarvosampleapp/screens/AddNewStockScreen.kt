@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,7 +46,6 @@ import com.themasked.skarvosampleapp.R
 import com.themasked.skarvosampleapp.database.entity.StockItemEntity
 import com.themasked.skarvosampleapp.viewmodel.StockItemsViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StockRow(label: String, text: String, keyboardType: KeyboardType, onTextChange: (String) -> Unit) {
     Card(
@@ -104,19 +104,19 @@ fun TopBackButton(
 fun AddNewStockScreen(navController: NavController, context: Context) {
     val stockItemsViewModel: StockItemsViewModel = hiltViewModel()
 
-    var stockName by remember {
+    var stockName by rememberSaveable {
         mutableStateOf("")
     }
 
-    var companyName by remember {
+    var companyName by rememberSaveable {
         mutableStateOf("")
     }
 
-    var stockPrice by remember {
+    var stockPrice by rememberSaveable {
         mutableStateOf("")
     }
 
-    var stockChange by remember {
+    var stockChange by rememberSaveable {
         mutableStateOf("")
     }
 

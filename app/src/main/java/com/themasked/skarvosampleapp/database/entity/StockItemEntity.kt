@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Entity class defining the schema of the "stock_item_entity"
+ */
 @Entity(tableName = "stock_item_entity")
 data class StockItemEntity(
     @PrimaryKey(autoGenerate = true)

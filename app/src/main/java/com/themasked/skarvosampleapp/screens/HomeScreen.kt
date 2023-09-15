@@ -42,7 +42,7 @@ fun HomeScreen(navController: NavController) {
     val screenHeight = with(density) {(LocalConfiguration.current.screenHeightDp).dp}
     val midY = screenHeight / 2
 
-    val bottomSheetScaffoldState = scaffoldState.bottomSheetState.targetValue
+    val bottomSheetScaffoldState = scaffoldState.bottomSheetState.currentValue
     Log.d("Home Screen", "$bottomSheetScaffoldState")
 
     Column {
